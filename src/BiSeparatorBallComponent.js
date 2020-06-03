@@ -14,9 +14,9 @@ const BiSeparatorBallPresentational = ({w, h, scale}) => {
 }
 
 const BiSeparatorBallComponent = (props) => {
-    const {scale, start} = useAnimatedScale(0.02, 20)
+    const {scale, start} = useAnimatedScale(0.02 / 3, 20)
     const {w, h} = useDimension()
-    return <div>
+    return <div onClick = {start}>
         <BiSeparatorBallPresentational w = {w} h = {h} scale = {scale} start = {start}/>
     </div>
 }
