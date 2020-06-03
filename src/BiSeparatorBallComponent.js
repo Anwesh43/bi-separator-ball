@@ -1,5 +1,5 @@
 import React from 'react'
-import {useStyle} from './hooks'
+import {useStyle, useAnimatedScale, useDimension} from './hooks'
 
 const Circle = ({w, h, scale, i}) => {
     const {getCircleStyle} = useStyle(w, h, scale)
@@ -13,4 +13,12 @@ const BiSeparatorBallPresentational = ({w, h, scale}) => {
     </div>
 }
 
-export default BiSeparatorBallPresentational
+const BiSeparatorBallComponent = (props) => {
+    const {scale, start} = useAnimatedScale(0.02, 20)
+    const {w, h} = useDimension()
+    return <div>
+        <BiSeparatorBallPresentational w = {w} h = {h} scale = {scale} start = {start}/>
+    </div>
+}
+
+export default BiSeparatorBallComponent
