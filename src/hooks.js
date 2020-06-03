@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {divideScale} from './util'
 
 export const useAnimatedScale = (scGap, delay) => {
     const [scale, setScale] = useState(0)
@@ -40,5 +41,37 @@ export const useDimension = () => {
     return {
         w,
         h
+    }
+}
+
+export const useStyle = (w, h, scale) => {
+    const fixedX = w / 2
+    const fixedY = h / 2
+    const position = 'absolute'
+    const size = Math.min(w, h) / 6
+    const sc1 = divideScale(scale, 0, 3)
+    const sc2 = divideScale(scale, 1, 3)
+    const sc3 = divideScale(scale, 2, 3)
+    const background = '#4CAF50'
+    return {
+        getCircleStyle(i) {
+            const si = 1 - 2 * i
+            const x = (fixedX - size / 2) * (1 - si * sc1 + si * sc3)
+            const y = (fixedY - size / 2) * (1 + sc2 - sc3)
+            const width = `${size}px`
+            const height = `${size}px`
+            const left = `${x}px`
+            const top = `${y}px`
+            const borderRadius = '50%'
+            return {
+                position,
+                left,
+                top,
+                background,
+                width,
+                height,
+                borderRadius
+            }
+        }
     }
 }
